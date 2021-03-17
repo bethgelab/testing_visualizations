@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Primary Meta Tags -->
+    <title>Exemplary Natural Images Explain CNN Activations Better than State-of-the-Art Feature Visualization</title>
+    <meta name="title" content="Exemplary Natural Images Explain CNN Activations Better than State-of-the-Art Feature Visualization">
+    <meta name="description"
+        content="Feature visualizations such as synthetic maximally activating images are a widely used explanation method to better understand the information processing of convolutional neural networks (CNNs). At the same time, there are concerns that these visualizations might not accurately represent CNNs' inner workings. Here, we measure how much extremely activating images help humans to predict CNN activations. Using a well-controlled psychophysical paradigm, we compare the informativeness of synthetic images by Olah et al. 2017 with a simple baseline visualization, namely exemplary natural images that also strongly activate a specific feature map. Given either synthetic or natural reference images, human participants choose which of two query images leads to strong positive activation. The experiment is designed to maximize participants' performance, and is the first to probe intermediate instead of final layer representations. We find that synthetic images indeed provide helpful information about feature map activations (82±4% accuracy; chance would be 50%). However, natural images - originally intended to be a baseline - outperform these synthetic images by a wide margin (92±2%). Additionally, participants are faster and more confident for natural images. The higher informativeness of natural images holds across most layers, for both expert and lay participants as well as for hand- and randomly-picked feature visualizations. Even if only a single reference image is given, synthetic images provide less information than natural images (65±5% vs. 73±4%). In summary, synthetic images from a popular feature visualization method are significantly less informative for assessing CNN activations than natural images. We argue that visualization methods should improve over this simple baseline.">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bethgelab.github.io/testing_visualizations/">
+    <meta property="og:title" content="Exemplary Natural Images Explain CNN Activations Better than State-of-the-Art Feature Visualization">
+    <meta property="og:description"
+        content="Feature visualizations such as synthetic maximally activating images are a widely used explanation method to better understand the information processing of convolutional neural networks (CNNs). At the same time, there are concerns that these visualizations might not accurately represent CNNs' inner workings. Here, we measure how much extremely activating images help humans to predict CNN activations. Using a well-controlled psychophysical paradigm, we compare the informativeness of synthetic images by Olah et al. 2017 with a simple baseline visualization, namely exemplary natural images that also strongly activate a specific feature map. Given either synthetic or natural reference images, human participants choose which of two query images leads to strong positive activation. The experiment is designed to maximize participants' performance, and is the first to probe intermediate instead of final layer representations. We find that synthetic images indeed provide helpful information about feature map activations (82±4% accuracy; chance would be 50%). However, natural images - originally intended to be a baseline - outperform these synthetic images by a wide margin (92±2%). Additionally, participants are faster and more confident for natural images. The higher informativeness of natural images holds across most layers, for both expert and lay participants as well as for hand- and randomly-picked feature visualizations. Even if only a single reference image is given, synthetic images provide less information than natural images (65±5% vs. 73±4%). In summary, synthetic images from a popular feature visualization method are significantly less informative for assessing CNN activations than natural images. We argue that visualization methods should improve over this simple baseline.">
+    <meta property="og:image" content="https://bethgelab.github.io/testing_visualizations/img/overview.svg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://bethgelab.github.io/testing_visualizations/">
+    <meta property="twitter:title" content="Exemplary Natural Images Explain CNN Activations Better than State-of-the-Art Feature Visualization">
+    <meta property="twitter:description"
+        content="Contrastive learning has recently seen tremendous success in self-supervised learning. So far, however, it is largely unclear why the learned representations generalize so effectively to a large variety of downstream tasks. We here prove that feedforward models trained with objectives belonging to the commonly used InfoNCE family learn to implicitly invert the underlying generative model of the observed data. While the proofs make certain statistical assumptions about the generative model, we observe empirically that our findings hold even if these assumptions are severely violated. Our theory highlights a fundamental connection between contrastive learning, generative modeling, and nonlinear independent component analysis, thereby furthering our understanding of the learned representations as well as providing a theoretical foundation to derive more effective contrastive losses.">
+    <meta property="twitter:image" content="https://bethgelab.github.io/testing_visualizations/img/overview.svg">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+
+    <style>
+        .main {
+            font-family: 'IBM Plex Sans Condensed', sans-serif;
+        }
+
+        .code {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .row {
+            padding-bottom: 20px;
+        }
+
+        .a {
+            color: gainsboro;
+            font-family: 'IBM Plex Sans Condensed', sans-serif;
+        }
+
+        td {
+            padding: 0 15px;
+        }
+
+        p {
+            text-align: justify;
+
+        }
+    </style>
+
+    <title>Exemplary Natural Images Explain CNN Activations Better than State-of-the-Art Feature Visualization</title>
+</head>
+
+<body>
+    <div class="container main">
+        <div class="row">
+            <div class="col-sm-2">
+            </div>
+            <div class="col-sm-8" id="main-content">
+                <div class="row text-center my-5" id="#">
+                    <h1>Exemplary Natural Images Explain CNN Activations Better than State-of-the-Art Feature Visualization</h1>
+                </div>
+
+                <!-- Begin author list-->
+                <div class="row text-center mb-4">
+                    <div class="col-sm-6 mb-4">
+                        Judy Borowski*
+                        <a href="mailto:judy.borowski@uni-tuebingen.de"><i class="far fa-envelope"></i></a></br>
+                        University of Tübingen & <nobr>IMPRS-IS</nobr>
+                    </div>
+                    <div class="col-sm-6  mb-4">
+                        Roland S. Zimmermann*
+                        <a href="mailto:roland.zimmermann@uni-tuebingen.de"><i class="far fa-envelope"></i></a>
+                        <a href="https://rzimmermann.com" target="_blank"><i class="fas fa-link"></i></a></br>
+                        University of Tübingen & <nobr>IMPRS-IS</nobr>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        Judith Schepers</br>
+                        University of Tübingen
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        Robert Geirhos</br>
+                        University of Tübingen & <nobr>IMPRS-IS</nobr>
+                    </div>
+                    <div class="col-sm-4  mb-4">
+                        Thomas S. A. Wallis</br>
+                        Technical University of Darmstadt
+                    </div>
+                    <div class="col-sm-4  mb-4">
+                        Matthias Bethge
+                        <a href="http://bethgelab.org/people" target="_blank"><i class="fas fa-link"></i></a><br>
+                        University of Tübingen
+                    </div>
+                    <div class="col-sm-4  mb-4">
+                        Wieland Brendel<br>
+                        University of Tübingen
+                    </div>
+                </div>
+                <!-- End author list-->
+
+                <div class="row text-center">
+                    <div class="col-sm-4 mb-4">
+                        <h4>
+                            <a href="https://arxiv.org/abs/2010.12606" target="_blank">
+                                <i class="fas fa-file-alt"></i>
+                                Paper
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="col-sm-4 mb-4">
+                        <h4>
+                            <a href="https://1drv.ms/u/s!ApshaNzdDzMXzId7hco88oEgF3MB7g?e=3puQa7" target="_blank">
+                                <i class="far fa-chart-bar"></i>
+                                Data
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="col-sm-4 mb-4">
+                        <h4>
+                            <a href="https://github.com/bethgelab/testing_visualizations target="_blank">
+                                <i class="fab fa-github"></i>
+                                Code
+                            </a>
+                        </h4>
+                    </div>
+
+                    <div class="col-sm-6 mb-4">
+                        <h4>
+                            <a href="https://bethgelab.github.io/testing_visualizations/poster/slides.pdf" target="_blank">
+                                <i class="fab fa-slideshare"></i>
+                                Poster
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="col-sm-6 mb-4">
+                        <h4>
+                            <a href="https://bethgelab.github.io/testing_visualizations/data/slides.pdf"_blank">
+                                <i class="fas fa-file-powerpoint"></i>
+                                Slides
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+
+                <div class="row text-center">
+                    <p>
+                        <b>tl;dr:</b>
+                        <span class="text-muted">
+                            Using human psychophysical experiments, we show that natural images can be significantly more informative for interpreting neural network activations than synthetic feature visualizations.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="row mt-2">
+                    <h3>News</h3>
+                </div>
+
+                <div class="row">
+                    <table>
+                        <tr>
+                            <td>
+                                <span class="badge badge-pill badge-primary">January '21</span>
+                            </td>
+                            <td>
+                                The <a href="https://openreview.net/forum?id=QO9-y8also-">paper</a> was accepted
+                                for poster presentation at the <a href="https://iclr.cc/Conferences/2021"
+                                    target="_blank">ICLR 2021</a>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <span class="badge badge-pill badge-primary">December '20</span>
+                            </td>
+                            <td>
+                                A shorter <a
+                                    href="https://openreview.net/forum?id=-vhO2VPjbVa"><i
+                                        class="far fa-sticky-note"></i> workshop version</a> of the paper was accepted
+                                for poster presentation at the <a href="https://www.svrhm.com/"
+                                    target="_blank">Shared Visual Representations in Human & Machine Intelligence Workshop at NeurIPS 2020</a>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="mr-10">
+                                <span class="badge badge-pill badge-primary">October '20</span>
+                            </td>
+                            <td>
+                                The pre-print is now available on <a href="https://arxiv.org/abs/2010.12606">arXiv</a>.
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="row mt-2">
+                    <h3>Abstract</h3>
+                </div>
+                <div class="row">
+                    <p>
+                        Feature visualizations such as synthetic maximally activating images are a widely used explanation method to better understand the information processing of convolutional neural networks (CNNs). At the same time, there are concerns that these visualizations might not accurately represent CNNs' inner workings. Here, we measure how much extremely activating images help humans to predict CNN activations. Using a well-controlled psychophysical paradigm, we compare the informativeness of synthetic images by Olah et al. 2017 with a simple baseline visualization, namely exemplary natural images that also strongly activate a specific feature map. Given either synthetic or natural reference images, human participants choose which of two query images leads to strong positive activation. The experiment is designed to maximize participants' performance, and is the first to probe intermediate instead of final layer representations. We find that synthetic images indeed provide helpful information about feature map activations (82±4% accuracy; chance would be 50%). However, natural images - originally intended to be a baseline - outperform these synthetic images by a wide margin (92±2%). Additionally, participants are faster and more confident for natural images. The higher informativeness of natural images holds across most layers, for both expert and lay participants as well as for hand- and randomly-picked feature visualizations. Even if only a single reference image is given, synthetic images provide less information than natural images (65±5% vs. 73±4%). In summary, synthetic images from a popular feature visualization method are significantly less informative for assessing CNN activations than natural images. We argue that visualization methods should improve over this simple baseline.
+                    </p>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <img src="img/fig_1.svg" style="width: 100%;" />
+                        <small class="text-muted">
+                            Overview: How useful are synthetic compared to natural images for interpreting neural network activations? Given extremely activating reference images (either <span style="color: #47789e! important">synthetic</span> or <span style="color: #ffad74! important">natural</span>), a human participant chooses which out of two query images is also a strongly activating image. Synthetic images were generated via feature visualization <a href="#" data-toggle="tooltip" title data-original-title="Olah, Chris, Alexander Mordvintsev, and Ludwig Schubert. &quot; Feature visualization.&quot; Distill 2.11 (2017): e7.
+                            ">Olah et al. (2017)</a>.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <h3>Why</h3>
+                </div>
+                <p>
+                    Feature visualizations such as synthetic maximally activating images are a widely used explanation method to better understand convolutional neural networks (CNNs). At the same time, there are concerns that these visualizations might not accurately represent CNNs’ inner workings. Here, we investigate how much extremely activating images help humans to predict CNN activations.
+                </p>
+
+
+                <div class="row mt-2">
+                    <h3>What we did</h3>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <p>
+                            Using a well-controlled psychophysical paradigm, we measure the informativeness of synthetic feature visualizations by <a href="#" data-toggle="tooltip" title data-original-title="Olah, Chris, Alexander Mordvintsev, and Ludwig Schubert. &quot; Feature visualization.&quot; Distill 2.11 (2017): e7.
+                            ">Olah et al. (2017)</a>. Here’s an example trial that participants did in our lab:
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div style="text-align: center;">
+                        <img src="img/fig_4a.svg" style="width: 22%;" />
+                    </div>
+                    <small class="text-muted">
+                        Given synthetic reference images, participants are well above chance (proportion correct: 82 ± 4%), but even better for natural reference images (92 ± 2%).
+                    </small>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <p>
+                            On the right hand side, we’re seeing maximally activating images; while on the left hand side, we’re seeing minimally activating images. The question always concerns the two images at the center of the screen: Which of them is also a strongly activating image? When breaking this down, all we’re really asking is which image at the center is more similar to those at the right side.<a href="#" data-toggle="tooltip" title data-original-title="In the above example trial, you probably identified some circular and spoke-like structure in the maximally activating images and would have tended to select the upper image of the car. While we observed that this seems to be a fairly easy example trial, checkout our paper for more difficult ones!"><sup>[1]</sup></a>
+                        </p>
+                        <p>
+                            As you can imagine, this task will give us some performance value. In order to set this into context besides the chance level of 50% (if you were to randomly guess at the above task, you would on average get 50% correct), we tested another condition that we intended as a baseline: natural images. This time, instead of showing extremely activating synthetic images at the sides, we displayed natural images that elicit either very low or very high activations. The task regarding the images at the center of the screen still remains the same: Which of the two is also a strongly activating image?
+                        </p>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <img src="img/fig_6ac.svg" style="width: 100%;" />
+                    <small class="text-muted">
+                        We found no evidence for large effects of expert level or feature map selection. However, performance does improve with additional information. Left: Both experts and lay participants perform equally well, and consistently better on natural than on synthetic images. Right: Presenting both maximally and minimally activating images simultaneously (Min+Max) and presenting nine instead of one single reference image tend to improve performance, especially for natural reference images.
+                    </small>
+                </div>
+
+                <div class="row mt-2">
+                    <h3>What we found</h3>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <p>
+                            First of all, we found that synthetic feature visualizations are indeed helpful: In 82±4% of the trials (that is many more than the chance number of 50%), participants chose the truly strongly activating image (blue bar). Surprisingly, though, participants answered the trials even more often correctly when they saw natural reference images at the sides, namely in 92±2% of the trials. 
+                        </p>
+                        <p>
+                            To see the results of many more conditions, such as performance of lay and expert participants, a comparison between hand-selected and randomly sampled feature maps and many more, check out our <a href="https://arxiv.org/abs/2010.12606">paper</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
+                    <h3>What we take from this</h3>
+                </div>
+
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <p>
+                            Most importantly, our data show that feature visualizations are indeed helpful for humans - and that natural images can be even more helpful. On a higher level, we take from this that thorough human quantitative evaluations of feature visualizations are needed and that example natural images might provide a surprisingly challenging baseline for understanding CNN activations.
+                        </p>
+                        <p>
+                            We’re continuing our work and investigating other aspects of the helpfulness of feature visualizations. Stay tuned!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h3>Acknowledgements & Funding</h3>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <p>
+                            We thank Felix A. Wichmann and Isabel Valera for helpful discussions. We further thank Alexander Böttcher and Stefan Sietzen for support as well as helfpul discussions on technical details. Additionally, we thank Chris Olah for clarifications via <a href="http://slack.distill.pub">slack</a>. Moreover, we thank Leon Sixt for valuable feedback on the introduction and related work. 
+                            From our lab, we thank Matthias Kümmerer, Matthias Tangemann, Evgenia Rusak and Ori Press for helping in piloting our experiments, as well as feedback from Evgenia Rusak, Claudio Michaelis, Dylan Paiton and Matthias Kümmerer. And finally, we thank all our participants for taking part in our experiments.                            
+                        </p>
+
+                        <p>
+                            We thank the <a href="https://imprs.is.mpg.de/" target="_blank">International Max Planck Research School for Intelligent Systems (IMPRS-IS)</a> for supporting JB, RZ and RG.
+                            We acknowledge support from the German Federal Ministry of Education and Research (BMBF)
+                            through the <a href="https://tuebingen.ai" target="_blank">Competence Center for Machine
+                            Learning (TUE.AI, FKZ 01IS18039A)</a> and the <a
+                            href="https://www.bccn-tuebingen.de/research/" target="_blank">Bernstein Computational
+                            Neuroscience Program Tübingen (FKZ: 01GQ1002)</a>, the Cluster of Excellence Machine Learning: New Perspectives for Sciences (EXC2064/1), and the German Research Foundation (DFG; SFB 1233, Robust Vision: Inference Principles and Neural Mechanisms, TP3, project number 276693517).
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <h3>BibTeX</h3>
+                </div>
+                <div class="row">
+                    <p>If you find our analysis helpful, please cite our pre-print:</p>
+                </div>
+                <div class="row justify-content-md-center">
+                    <div class="col-sm-8 rounded p-3 m-2" style="background-color:lightgray;">
+                        <small class="code">
+                            @article{borowski2021exemplary,<br>
+                            &nbsp;&nbsp;author = { <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Borowski, Judy and<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Zimmermann, Roland S. and<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Schepers, Judith and<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Geirhos, Robert and<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Wallis, Thomas S. A., and<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Bethge, Matthias and<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Brendel, Wieland<br>
+                            &nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;title = {<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Exemplary Natural Images Explain<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;CNN Activations Better than<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;State-of-the-Art Feature Visualization<br>
+                            &nbsp;&nbsp;},<br>
+                            &nbsp;&nbsp;booktitle = {Ninth International Conference on <br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;Learning Representations (ICLR 2021)},<br>
+                            &nbsp;&nbsp;year = {2021},<br>
+                            }
+                        </small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <small class="text-muted">Webpage designed using Bootstrap 4.5.</small>
+                    <a href="#" class="ml-auto"><i class="fas fa-sort-up"></i></a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+
+</body>
+
+</html>
