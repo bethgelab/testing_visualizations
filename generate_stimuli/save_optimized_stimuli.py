@@ -37,7 +37,7 @@ parser.add_argument(
     "-o",
     "--objective",
     default="channel",
-    help="decide whether to choose images according to the neuron or channel objective",
+    help="choose images according to the channel objective",
 )
 parser.add_argument(
     "-n", "--n-images", default=10, type=int, help="how many images to generate"
@@ -69,99 +69,9 @@ tf.set_random_seed(1234)
 path_to_csv_file = os.path.join(stimuli_dir, f"layer_folder_mapping_{trial_type}.csv")
 unit_specs_df = pd.read_csv(path_to_csv_file, header=1)
 
-if args.objective == "neuron":
-    path_to_rf_sizes_csv_file = os.path.join(
-        stimuli_dir, f"layer_folder_mapping_{trial_type}_neuron_padded_rf_sizes.csv"
-    )
-    neuron_rf_sizes = pd.read_csv(path_to_rf_sizes_csv_file)
-
 ut_stim.make_all_dirs(
     stimuli_dir, objective, f"{trial_type}_trials", image_type, unit_specs_df
 )
-
-
-def get_neuron_objective_stimuli(layer, channel):
-    def get_crop_idxs(layer_str, channel):
-        filtered_df = neuron_rf_sizes.loc[
-            (
-                neuron_rf_sizes["layer_name"] + "_" + neuron_rf_sizes["pre_post_relu"]
-                == layer_str
-            )
-            & (neuron_rf_sizes["feature_map_number"] == channel)
-        ]
-
-        return int(filtered_df["min_idx"].iloc[0]), int(filtered_df["max_idx"].iloc[0])
-
-    img_size = 224
-    padding_size = 16  # avoid edge artifacts as described in Feature Visualization blog
-    param_f = lambda: param.image(img_size + 2 * padding_size, batch=number_images)
-    objective_per_image = objectives.neuron(layer, channel)
-    diversity_loss = -1e2 * objectives.diversity(layer)
-
-    # transformations as described in Feature Visualization blog post
-    kwargs = dict(
-        thresholds=(2560,),
-        optimizer=tf.train.AdamOptimizer(learning_rate=0.05),
-        transforms=[
-            transform.jitter(16),
-            transform.random_scale((1.0, 0.975, 1.025, 0.95, 1.05)),
-            transform.random_rotate((-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5)),
-            transform.jitter(8),
-        ],
-    )
-
-    # generate min stimuli
-    _, min_stimuli, min_loss, loss_additional_global_list = render.render_vis(
-        model,
-        -objective_per_image,
-        diversity_loss,
-        param_f,
-        use_fixed_seed=True,
-        **kwargs,
-    )
-    # the optimization saves multiple states of the results
-    # the last item is the final value
-    min_stimuli = min_stimuli[-1]
-    min_loss = min_loss[-1]
-    min_loss_additional_global = loss_additional_global_list[-1]
-
-    # undo/crop padding as described in Feature Visualization blog
-    min_stimuli = min_stimuli[:, padding_size:-padding_size, padding_size:-padding_size]
-
-    # invert min_loss again
-    min_loss = -min_loss
-
-    # generate max stimuli
-    _, max_stimuli, max_loss, loss_additional_global_list = render.render_vis(
-        model,
-        objective_per_image,
-        diversity_loss,
-        param_f,
-        use_fixed_seed=True,
-        **kwargs,
-    )
-    # see above
-    max_stimuli = max_stimuli[-1]
-    max_loss = max_loss[-1]
-    max_loss_additional_global = loss_additional_global_list[-1]
-
-    # undo/crop padding
-    max_stimuli = max_stimuli[:, padding_size:-padding_size, padding_size:-padding_size]
-
-    # select crop for neuron objective
-    min_idx, max_idx = get_crop_idxs(layer, channel)
-    min_stimuli = min_stimuli[:, min_idx : max_idx + 1, min_idx : max_idx + 1]
-    max_stimuli = max_stimuli[:, min_idx : max_idx + 1, min_idx : max_idx + 1]
-
-    return (
-        min_stimuli,
-        min_loss,
-        min_loss_additional_global,
-        max_stimuli,
-        max_loss,
-        max_loss_additional_global,
-    )
-
 
 def get_channel_objective_stimuli(layer, channel):
     img_size = 224
@@ -237,16 +147,7 @@ for idx, cur_row in tqdm(unit_specs_df.iterrows(), total=len(unit_specs_df)):
     layer = f"{cur_row['layer_name']}_{cur_row['pre_post_relu']}"
     channel = cur_row["feature_map_number"]
 
-    if objective == "neuron":
-        (
-            min_stimuli,
-            min_loss,
-            min_loss_additional_global,
-            max_stimuli,
-            max_loss,
-            max_loss_additional_global,
-        ) = get_neuron_objective_stimuli(layer, channel)
-    elif objective == "channel":
+    if objective == "channel":
         (
             min_stimuli,
             min_loss,
@@ -255,6 +156,8 @@ for idx, cur_row in tqdm(unit_specs_df.iterrows(), total=len(unit_specs_df)):
             max_loss,
             max_loss_additional_global,
         ) = get_channel_objective_stimuli(layer, channel)
+    else:
+        raise ValueError("The objective must be channel.")
 
     # save images
     stim_dir_super = ut_stim.get_stim_dir_super(
