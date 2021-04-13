@@ -67,6 +67,41 @@
             text-align: justify;
 
         }
+
+        .collapse-container {
+            text-align: center;
+            position: relative;
+
+        }
+
+        .collapse-container #moreless.collapsed:after {
+            content: '+ Show More';
+        }
+
+        .collapse-container #moreless:not(.collapsed):after {
+            content: '- Show Less';
+        }
+
+        .collapse-container .collapse.collapse:not(.show) {
+            display: block;
+            /* height = lineheight * no of lines to display */
+            height: 5.7em;
+            overflow: hidden;
+        }
+
+        .collapse-container .collapse.collapse:not(.show):before {
+            content: '';
+            width: 100%;
+            height: 5.7em;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: linear-gradient(rgba(255, 255, 255, 0), 20px, white);
+        }
+
+        .collapse-container .collapse.collapsing {
+            height: 5.7em;
+        }
     </style>
 
     <title>Exemplary Natural Images Explain CNN Activations Better than State-of-the-Art Feature Visualizations</title>
@@ -147,7 +182,7 @@
 
                     <div class="col-sm-6 mb-4">
                         <h4>
-                            <a href="https://bethgelab.github.io/testing_visualizations/poster/slides.pdf" target="_blank">
+                            <a href="https://bethgelab.github.io/testing_visualizations/data/poster.pdf" target="_blank">
                                 <i class="fab fa-slideshare"></i>
                                 Poster
                             </a>
@@ -184,7 +219,7 @@
                             </td>
                             <td>
                                 The <a href="https://openreview.net/forum?id=QO9-y8also-">paper</a> was accepted
-                                for poster presentation at the <a href="https://iclr.cc/Conferences/2021"
+                                for a poster presentation at <a href="https://iclr.cc/Conferences/2021"
                                     target="_blank">ICLR 2021</a>.
                             </td>
                         </tr>
@@ -194,9 +229,8 @@
                             </td>
                             <td>
                                 A shorter <a
-                                    href="https://openreview.net/forum?id=-vhO2VPjbVa"><i
-                                        class="far fa-sticky-note"></i> workshop version</a> of the paper was accepted
-                                for poster presentation at the <a href="https://www.svrhm.com/"
+                                    href="https://openreview.net/forum?id=-vhO2VPjbVa">workshop version</a> of the paper was accepted
+                                for a poster presentation at the <a href="https://www.svrhm.com/"
                                     target="_blank">Shared Visual Representations in Human & Machine Intelligence Workshop at NeurIPS 2020</a>.
                             </td>
                         </tr>
@@ -212,20 +246,30 @@
                 </div>
 
                 <div class="row mt-2">
+                    <div class="col-12">
+                        <p>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row mt-2">
                     <h3>Abstract</h3>
                 </div>
-                <div class="row">
-                    <p>
-                        Feature visualizations such as synthetic maximally activating images are a widely used explanation method to better understand the information processing of convolutional neural networks (CNNs). At the same time, there are concerns that these visualizations might not accurately represent CNNs' inner workings. Here, we measure how much extremely activating images help humans to predict CNN activations. Using a well-controlled psychophysical paradigm, we compare the informativeness of synthetic images by Olah et al. 2017 with a simple baseline visualization, namely exemplary natural images that also strongly activate a specific feature map. Given either synthetic or natural reference images, human participants choose which of two query images leads to strong positive activation. The experiment is designed to maximize participants' performance, and is the first to probe intermediate instead of final layer representations. We find that synthetic images indeed provide helpful information about feature map activations (82±4% accuracy; chance would be 50%). However, natural images - originally intended to be a baseline - outperform these synthetic images by a wide margin (92±2%). Additionally, participants are faster and more confident for natural images. The higher informativeness of natural images holds across most layers, for both expert and lay participants as well as for hand- and randomly-picked feature visualizations. Even if only a single reference image is given, synthetic images provide less information than natural images (65±5% vs. 73±4%). In summary, synthetic images from a popular feature visualization method are significantly less informative for assessing CNN activations than natural images. We argue that visualization methods should improve over this simple baseline.
-                    </p>
+                <div class="row mt-2">
+                    <div class="col-12 collapse-container">
+                        <p class="collapse" id="abstractText" aria-expanded="false">
+                            Feature visualizations such as synthetic maximally activating images are a widely used explanation method to better understand the information processing of convolutional neural networks (CNNs). At the same time, there are concerns that these visualizations might not accurately represent CNNs' inner workings. Here, we measure how much extremely activating images help humans to predict CNN activations. Using a well-controlled psychophysical paradigm, we compare the informativeness of synthetic images by Olah et al. 2017 with a simple baseline visualization, namely exemplary natural images that also strongly activate a specific feature map. Given either synthetic or natural reference images, human participants choose which of two query images leads to strong positive activation. The experiment is designed to maximize participants' performance, and is the first to probe intermediate instead of final layer representations. We find that synthetic images indeed provide helpful information about feature map activations (82±4% accuracy; chance would be 50%). However, natural images - originally intended to be a baseline - outperform these synthetic images by a wide margin (92±2%). Additionally, participants are faster and more confident for natural images. The higher informativeness of natural images holds across most layers, for both expert and lay participants as well as for hand- and randomly-picked feature visualizations. Even if only a single reference image is given, synthetic images provide less information than natural images (65±5% vs. 73±4%). In summary, synthetic images from a popular feature visualization method are significantly less informative for assessing CNN activations than natural images. We argue that visualization methods should improve over this simple baseline.
+                        </p>
+                       <a role="button" id="moreless" class="collapsed" data-toggle="collapse" href="#abstractText" aria-expanded="false" aria-controls="abstractText"></a>
+                    </div>
                 </div>
 
                 <div class="row mt-2">
                     <div class="col-12">
                         <img src="img/fig_1.svg" style="width: 100%;" />
                         <small class="text-muted">
-                            Overview: How useful are synthetic compared to natural images for interpreting neural network activations? Given extremely activating reference images (either <span style="color: #47789e! important">synthetic</span> or <span style="color: #ffad74! important">natural</span>), a human participant chooses which out of two query images is also a strongly activating image. Synthetic images were generated via feature visualization <a href="#" data-toggle="tooltip" title data-original-title="Olah, Chris, Alexander Mordvintsev, and Ludwig Schubert. &quot; Feature visualization.&quot; Distill 2.11 (2017): e7.
-                            ">Olah et al. (2017)</a>.
+                            Overview: How useful are synthetic compared to natural images for interpreting neural network activations? Given extremely activating reference images (either <span style="color: #47789e! important">synthetic</span> or <span style="color: #ffad74! important">natural</span>), a human participant chooses which out of two query images is also a strongly activating image. Synthetic images were generated via feature visualization (<a href="#" data-toggle="tooltip" title data-original-title="Olah, Chris, Alexander Mordvintsev, and Ludwig Schubert. &quot; Feature visualization.&quot; Distill 2.11 (2017): e7.
+                            ">Olah et al. (2017)</a>).
                         </small>
                     </div>
                 </div>
@@ -234,7 +278,8 @@
                     <h3>Why</h3>
                 </div>
                 <p>
-                    Feature visualizations such as synthetic maximally activating images are a widely used explanation method to better understand convolutional neural networks (CNNs). At the same time, there are concerns that these visualizations might not accurately represent CNNs’ inner workings. Here, we investigate how much extremely activating images help humans to predict CNN activations.
+                    Feature visualizations such as synthetic maximally activating images are a widely used explanation method. They are used to better understand convolutional neural networks (CNNs) as they grant insights into their learned features. At the same time, there are concerns that these visualizations might not accurately represent CNNs’ inner workings. Here, we investigate how much extremely activating images help humans to predict CNN activations.
+                    <br> <br>
                 </p>
 
 
@@ -252,7 +297,8 @@
                 <div class="col-12">
                     <img src="img/fig_2.svg" style="width: 100%;" />
                     <small class="text-muted">
-                        Example trial in psychophysical experiments to measure the effectiveness of synthetic feature visualizations. A participant is shown minimally and maximally activating feature visualizations as reference images for a certain feature map on the sides and is asked to select the image from the center that also strongly activates that feature map. The answer is given by clicking on the number according to the participant's confidence level (1: not confident, 2: somewhat confident, 3: very confident).
+                        Based on minimally and maximally activating feature visualizations for a certain feature map shown at the sides, a participant is asked to select the image from the center that also strongly activates that feature map.
+                        <br> <br>
                     </small>
                 </div>
                 <div class="row mt-2">
@@ -268,7 +314,7 @@
                 <div class="col-12">
                     <img src="img/fig_2b.svg" style="width: 100%;" />
                     <small class="text-muted">
-                        Example trial in psychophysical experiments to measure the baseline performance of natural images.
+                        Example trial in psychophysical experiments to measure the baseline performance of natural images. <br> <br>
                     </small>
                 </div>
 
@@ -279,7 +325,7 @@
                 <div class="row mt-2">
                     <div class="col-12">
                         <p>
-                            First of all, we found that synthetic feature visualizations are indeed helpful: In 82±4% of the trials (that is many more than the chance number of 50%), participants chose the truly strongly activating image (blue bar). Surprisingly, though, participants answered the trials even more often correctly when they saw natural reference images at the sides, namely in 92±2% of the trials. 
+                            First of all, we found that synthetic feature visualizations are indeed helpful: In 82±4% of the trials (that is many more than the chance proportion of 50%), participants chose the truly strongly activating image (blue bar). Surprisingly, though, participants answered the trials even more often correctly when they were given natural reference images at the sides, namely in 92±2% of the trials. 
                         </p>
                     </div>
                 </div>
@@ -294,15 +340,9 @@
                 <div class="row mt-2">
                     <div class="col-12">
                         <p>
-                            To see the results of many more conditions, such as performance of lay and expert participants, a comparison between hand-selected and randomly sampled feature maps and many more, check out our <a href="https://arxiv.org/abs/2010.12606">paper</a>.
+                            To see the results of many more conditions, such as performance of lay and expert participants, a comparison between hand-selected and randomly sampled feature maps, check out our <a href="https://arxiv.org/abs/2010.12606">paper</a>.
                         </p>
                     </div>
-                </div>
-                <div class="col-12">
-                    <img src="img/fig_6ac.svg" style="width: 100%;" />
-                    <small class="text-muted">
-                        We found no evidence for large effects of expert level or feature map selection. However, performance does improve with additional information. Left: Both experts and lay participants perform equally well, and consistently better on natural than on synthetic images. Right: Presenting both maximally and minimally activating images simultaneously (Min+Max) and presenting nine instead of one single reference image tend to improve performance, especially for natural reference images.
-                    </small>
                 </div>
 
                 <div class="row mt-2">
@@ -324,20 +364,19 @@
                     <h3>Acknowledgements & Funding</h3>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-12">
-                        <p>
+                    <div class="col-12 collapse-container">
+                        <p class="collapse" id="acknowledgmentsText" aria-expanded="false">
                             We thank Felix A. Wichmann and Isabel Valera for helpful discussions. We further thank Alexander Böttcher and Stefan Sietzen for support as well as helfpul discussions on technical details. Additionally, we thank Chris Olah for clarifications via <a href="http://slack.distill.pub">slack</a>. Moreover, we thank Leon Sixt for valuable feedback on the introduction and related work. 
                             From our lab, we thank Matthias Kümmerer, Matthias Tangemann, Evgenia Rusak and Ori Press for helping in piloting our experiments, as well as feedback from Evgenia Rusak, Claudio Michaelis, Dylan Paiton and Matthias Kümmerer. And finally, we thank all our participants for taking part in our experiments.                            
-                        </p>
-
-                        <p>
+                            <br>
                             We thank the <a href="https://imprs.is.mpg.de/" target="_blank">International Max Planck Research School for Intelligent Systems (IMPRS-IS)</a> for supporting JB, RZ and RG.
                             We acknowledge support from the German Federal Ministry of Education and Research (BMBF)
                             through the <a href="https://tuebingen.ai" target="_blank">Competence Center for Machine
                             Learning (TUE.AI, FKZ 01IS18039A)</a> and the <a
                             href="https://www.bccn-tuebingen.de/research/" target="_blank">Bernstein Computational
-                            Neuroscience Program Tübingen (FKZ: 01GQ1002)</a>, the Cluster of Excellence Machine Learning: New Perspectives for Sciences (EXC2064/1), and the German Research Foundation (DFG; SFB 1233, Robust Vision: Inference Principles and Neural Mechanisms, TP3, project number 276693517).
+                            Neuroscience Program Tübingen (FKZ: 01GQ1002)</a>, the Cluster of Excellence Machine Learning: New Perspectives for Sciences (EXC2064/1), and the German Research Foundation (DFG; <a href="https://uni-tuebingen.de/forschung/forschungsschwerpunkte/sonderforschungsbereiche/sfb-1233/" target="_blank">SFB 1233, Robust Vision: Inference Principles and Neural Mechanisms, TP3, project number 276693517)</a>.
                         </p>
+                       <a role="button" id="moreless" class="collapsed" data-toggle="collapse" href="#acknowledgmentsText" aria-expanded="false" aria-controls="acknowledgmentsText"></a>
                     </div>
                 </div>
                 <div class="row">
@@ -381,9 +420,6 @@
         </div>
 
     </div>
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
