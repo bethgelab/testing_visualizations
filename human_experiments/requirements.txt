@@ -63,7 +63,7 @@ ptyprocess==0.6.0
 pycparser
 pygame==1.9.6
 pyglet
-Pygments==2.6.1
+Pygments==2.7.4
 pylint
 pyo==1.0.1
 PyOpenGL==3.1.5
