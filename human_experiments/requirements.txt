@@ -35,7 +35,7 @@ jedi
 json-tricks==3.15.2
 kiwisolver==1.2.0
 lazy-object-proxy==1.4.3
-lxml==4.5.2
+lxml==4.6.3
 macropy3==1.1.0b2
 matplotlib
 mccabe==0.6.1
