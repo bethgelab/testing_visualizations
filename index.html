@@ -25,7 +25,7 @@
     <meta property="twitter:url" content="https://bethgelab.github.io/testing_visualizations/">
     <meta property="twitter:title" content="Exemplary Natural Images Explain CNN Activations Better than State-of-the-Art Feature Visualizations">
     <meta property="twitter:description"
-        content="Contrastive learning has recently seen tremendous success in self-supervised learning. So far, however, it is largely unclear why the learned representations generalize so effectively to a large variety of downstream tasks. We here prove that feedforward models trained with objectives belonging to the commonly used InfoNCE family learn to implicitly invert the underlying generative model of the observed data. While the proofs make certain statistical assumptions about the generative model, we observe empirically that our findings hold even if these assumptions are severely violated. Our theory highlights a fundamental connection between contrastive learning, generative modeling, and nonlinear independent component analysis, thereby furthering our understanding of the learned representations as well as providing a theoretical foundation to derive more effective contrastive losses.">
+        content="Feature visualizations such as synthetic maximally activating images are a widely used explanation method to better understand the information processing of convolutional neural networks (CNNs). At the same time, there are concerns that these visualizations might not accurately represent CNNs' inner workings. Here, we measure how much extremely activating images help humans to predict CNN activations. Using a well-controlled psychophysical paradigm, we compare the informativeness of synthetic images by Olah et al. 2017 with a simple baseline visualization, namely exemplary natural images that also strongly activate a specific feature map. Given either synthetic or natural reference images, human participants choose which of two query images leads to strong positive activation. The experiment is designed to maximize participants' performance, and is the first to probe intermediate instead of final layer representations. We find that synthetic images indeed provide helpful information about feature map activations (82±4% accuracy; chance would be 50%). However, natural images - originally intended to be a baseline - outperform these synthetic images by a wide margin (92±2%). Additionally, participants are faster and more confident for natural images. The higher informativeness of natural images holds across most layers, for both expert and lay participants as well as for hand- and randomly-picked feature visualizations. Even if only a single reference image is given, synthetic images provide less information than natural images (65±5% vs. 73±4%). In summary, synthetic images from a popular feature visualization method are significantly less informative for assessing CNN activations than natural images. We argue that visualization methods should improve over this simple baseline.">
     <meta property="twitter:image" content="https://bethgelab.github.io/testing_visualizations/img/overview.svg">
 
     <!-- Bootstrap CSS -->
@@ -139,16 +139,16 @@
                         University of Tübingen & <nobr>IMPRS-IS</nobr>
                     </div>
                     <div class="col-sm-4  mb-4">
-                        Thomas S. A. Wallis</br>
+                        Thomas S. A. Wallis<sup>&dagger;</sup></br>
                         Technical University of Darmstadt
                     </div>
                     <div class="col-sm-4  mb-4">
-                        Matthias Bethge
+                        Matthias Bethge<sup>&dagger;</sup>
                         <a href="http://bethgelab.org/people" target="_blank"><i class="fas fa-link"></i></a><br>
                         University of Tübingen
                     </div>
                     <div class="col-sm-4  mb-4">
-                        Wieland Brendel<br>
+                        Wieland Brendel<sup>&dagger;</sup><br>
                         University of Tübingen
                     </div>
                 </div>
@@ -213,6 +213,15 @@
 
                 <div class="row">
                     <table>
+                        <tr>
+                            <td>
+                                <span class="badge badge-pill badge-primary">May '21</span>
+                            </td>
+                            <td>
+                                <a href="https://iclr.cc/virtual/2021/poster/3153">Poster presentation</a> at <a href="https://iclr.cc/Conferences/2021"
+                                    target="_blank">ICLR 2021</a>.
+                            </td>
+                        </tr>
                         <tr>
                             <td>
                                 <span class="badge badge-pill badge-primary">January '21</span>
@@ -383,12 +392,12 @@
                     <h3>BibTeX</h3>
                 </div>
                 <div class="row">
-                    <p>If you find our analysis helpful, please cite our pre-print:</p>
+                    <p>Please cite our paper as follows:</p>
                 </div>
                 <div class="row justify-content-md-center">
                     <div class="col-sm-8 rounded p-3 m-2" style="background-color:lightgray;">
                         <small class="code">
-                            @article{borowski2021exemplary,<br>
+                            @inproceedings{borowski2021exemplary,<br>
                             &nbsp;&nbsp;author = { <br>
                             &nbsp;&nbsp;&nbsp;&nbsp;Borowski, Judy and<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;Zimmermann, Roland S. and<br>
